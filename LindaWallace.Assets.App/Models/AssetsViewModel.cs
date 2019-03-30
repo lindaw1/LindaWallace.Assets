@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace LindaWallace.Assets.Domain
+namespace LindaWallace.Assets.App.Models
 {
-    public class Asset
+    public class AssetsViewModel
     {
         public int Id { get; set; }
 
@@ -12,7 +15,7 @@ namespace LindaWallace.Assets.Domain
         public string TagNumber { get; set; }
 
         public int AssetTypeId { get; set; }
-        
+
         [Required]
         public string Manufacturer { get; set; }
 
@@ -22,11 +25,9 @@ namespace LindaWallace.Assets.Domain
         [Required]
         public string Description { get; set; }
 
-        [Required]
+        [Required, DisplayName("Serial Number")]
         public string SerialNumber { get; set; }
-
-        //navigational - creates ability to link to the AssetType table
-        public AssetType AssetType { get; set; }
-
+        
+        
     }
 }
