@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using LindaWallace.Assets.App.Models;
 using LindaWallace.Assets.BLL;
+using LindaWallace.Assets.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LindaWallace.Assets.App.Controllers
 {
@@ -22,21 +24,10 @@ namespace LindaWallace.Assets.App.Controllers
                    AssetTypeId = a.AssetTypeId,
                    Description = a.Description,
                    Manufacturer = a.Manufacturer,
+                   Model = a.Model,
                    SerialNumber = a.SerialNumber,
                    TagNumber = a.TagNumber
 
-
-
-
-
-                   //Address = rp.Address,
-                   //City = rp.City,
-                   //Id = rp.Id,
-                   //OwnerName = rp.Owner.Name,
-                   //PostalCode = rp.PostalCode,
-                   //PropertyStyle = rp.PropertyType.Style,
-                   //Province = rp.Province,
-                   //RentAmount = rp.Rent.ToString()
                }).ToList();
 
             //pass the model to the view
@@ -53,17 +44,24 @@ namespace LindaWallace.Assets.App.Controllers
         // GET: Asset/Create
         public ActionResult Create()
         {
+            //get property types and owners from their managers
+            var assetTypes = AssetTypeManager.GetAsKeyValuePairs();
+            var list = new SelectList(assetTypes, "Id", "Name");
+            ViewBag.AssetTypeId = list;
+
+
             return View();
         }
 
         // POST: Asset/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Asset asset)
         {
             try
             {
-                // TODO: Add insert logic here
+                // call the Method to add an asset - see Asset manager class
+                AssetManager.Add(asset);          
 
                 return RedirectToAction(nameof(Index));
             }
@@ -72,6 +70,37 @@ namespace LindaWallace.Assets.App.Controllers
                 return View();
             }
         }
+        //// GET: Rentals/Create
+        //public ActionResult Create()
+        //{
+        //    //get property types and owners from their managers
+        //    var propertyTypes = PropertyTypeManager.GetAsKeyValuePairs();
+        //    var list = new SelectList(propertyTypes, "Id", "Style");
+        //    ViewBag.PropertyTypeId = list;
+
+        //    var owners = OwnerManager.GetAsKeyValuePairs();
+        //    var ownerList = new SelectList(owners, "Id", "Name");
+        //    ViewBag.OwnerId = ownerList;
+
+        //    return View();
+        //}
+
+        //// POST: Rentals/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(RentalProperty rental)
+        //{
+        //    try
+        //    {
+        //        RentalsManager.Add(rental);
+
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         // GET: Asset/Edit/5
         public ActionResult Edit(int id)
