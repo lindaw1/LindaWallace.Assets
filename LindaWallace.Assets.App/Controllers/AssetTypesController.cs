@@ -7,61 +7,53 @@ using LindaWallace.Assets.BLL;
 using LindaWallace.Assets.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LindaWallace.Assets.App.Controllers
 {
-    public class AssetsController : Controller
+    public class AssetTypesController : Controller
     {
-        // GET: Asset
+        
+
+        // GET: AssetTypes
         public ActionResult Index()
         {
+            var assetTypes = AssetTypeManager.GetAll().
+            Select(at => new AssetTypesViewModel
+            {
+                Id = at.Id,
+                TypeName = at.Name,
 
-            //get the model
-            var assets = AssetManager.GetAll().
-               Select(a => new AssetsViewModel
-               {
-                   AssetType = a.AssetType.Name,
-                   Description = a.Description,
-                   Manufacturer = a.Manufacturer,
-                   Model = a.Model,
-                   SerialNumber = a.SerialNumber,
-                   TagNumber = a.TagNumber
+            }).ToList();
 
-               }).ToList();
-
-            //pass the model to the view
-            return View(assets);
-           
+            return View(assetTypes);
         }
 
-        // GET: Asset/Details/5
+ 
+
+        // GET: AssetTypes/Details/5
         //public ActionResult Details(int id)
         //{
         //    return View();
         //}
 
-        // GET: Asset/Create
+        //GET: AssetTypes/Create
         public ActionResult Create()
         {
-            //get Asset type from AssetTypeManager.  This will populate the dropdown list in the Create page
-            var assetTypes = AssetTypeManager.GetAsKeyValuePairs();
-            var list = new SelectList(assetTypes, "Id", "Name");
-            ViewBag.AssetTypeId = list;
-
+          
 
             return View();
         }
 
-        // POST: Asset/Create
+        // POST: AssetTypes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Asset asset)
+        public ActionResult Create(AssetType assetType)
         {
             try
             {
-                // call the Method to add an asset - see Asset manager class
-                AssetManager.Add(asset);          
+                
+                // call the Method to add an assetType - see AssetType manager class
+                AssetTypeManager.Add(assetType);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -70,15 +62,14 @@ namespace LindaWallace.Assets.App.Controllers
                 return View();
             }
         }
- 
-        
-        //// GET: Asset/Edit/5
+
+        //// GET: AssetTypes/Edit/5
         //public ActionResult Edit(int id)
         //{
         //    return View();
         //}
 
-        //// POST: Asset/Edit/5
+        //// POST: AssetTypes/Edit/5
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //public ActionResult Edit(int id, IFormCollection collection)
@@ -95,13 +86,13 @@ namespace LindaWallace.Assets.App.Controllers
         //    }
         //}
 
-        //// GET: Asset/Delete/5
+        //// GET: AssetTypes/Delete/5
         //public ActionResult Delete(int id)
         //{
         //    return View();
         //}
 
-        //// POST: Asset/Delete/5
+        //// POST: AssetTypes/Delete/5
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //public ActionResult Delete(int id, IFormCollection collection)

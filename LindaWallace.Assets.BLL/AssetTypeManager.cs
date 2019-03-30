@@ -31,6 +31,7 @@ namespace LindaWallace.Assets.BLL
                 at.Name
             }).ToList();
             return types;
+    
         }
     }
 }

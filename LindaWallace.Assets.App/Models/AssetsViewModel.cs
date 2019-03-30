@@ -11,10 +11,11 @@ namespace LindaWallace.Assets.App.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required, DisplayName("Tag #")]
         public string TagNumber { get; set; }
 
-        public int AssetTypeId { get; set; }
+        [DisplayName("Asset Type")]
+        public string AssetType { get; set; }
 
         [Required]
         public string Manufacturer { get; set; }

@@ -71,19 +71,19 @@ namespace LindaWallace.Assets.Data
                 new AssetType
                 {
                     Id = 1,
-                    Name = "desktopComputer"
+                    Name = "Desktop Computer"
                 },
 
                 new AssetType
                 {
                     Id = 2,
-                    Name = "computerMonitor"
+                    Name = "Computer Monitor"
                 },
 
                 new AssetType
                 {
                     Id = 3,
-                    Name = "phone"
+                    Name = "Phone"
                 }
 
                 );
