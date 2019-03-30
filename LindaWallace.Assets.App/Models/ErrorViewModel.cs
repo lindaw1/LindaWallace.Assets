@@ -1,6 +1,6 @@
 using System;
 
-namespace LindaWallace.Assets.Domain.Models
+namespace LindaWallace.Assets.App.Models
 {
     public class ErrorViewModel
     {

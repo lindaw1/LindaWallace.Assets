@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace LindaWallace.Assets.Domain
+namespace LindaWallace.Assets.App
 {
     public class Program
     {

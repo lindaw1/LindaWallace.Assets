@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LindaWallace.Assets.Domain
+namespace LindaWallace.Assets.App
 {
     public class Startup
     {
